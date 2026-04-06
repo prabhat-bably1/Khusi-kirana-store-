@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kirana Store</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+body{background:#f4f6f9;}
+
+/* NAV */
+nav{
+background:#111;
+padding:15px;
+text-align:center;
+color:white;
+}
+
+/* HERO */
+.hero{
+background:linear-gradient(135deg,#28a745,#6ddf6d);
+color:white;
+text-align:center;
+padding:50px 20px;
+}
+
+.hero button{
+margin:10px;
+padding:12px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* CATEGORY */
+.categories{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.cat{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+cursor:pointer;
+text-align:center;
+}
+
+.cat img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+/* PRODUCTS */
+.products{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+.card button{
+margin:10px;
+padding:10px;
+background:#25D366;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+/* OFFER */
+.offer{
+background:#fff3cd;
+padding:20px;
+text-align:center;
+margin:20px;
+}
+
+/* CONTACT */
+.contact{
+padding:20px;
+text-align:center;
+background:white;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>Gupta Kirana Store</h2>
+</nav>
+
+<div class="hero">
+<h1>Daily Grocery at Best Price</h1>
+<button onclick="scrollToProducts()">View Products</button>
+</div>
+
+<!-- CATEGORY -->
+<div class="categories">
+
+<div class="cat" onclick="show('rice')">
+<img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
+<h3>Rice & Atta</h3>
+</div>
+
+<div class="cat" onclick="show('snacks')">
+<img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707">
+<h3>Snacks</h3>
+</div>
+
+<div class="cat" onclick="show('drinks')">
+<img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
+<h3>Beverages</h3>
+</div>
+
+</div>
+
+<!-- PRODUCTS -->
+<div id="products" class="products"></div>
+
+<!-- OFFER -->
+<div class="offer">
+<h3>🔥 Today Offer: Buy 2 Get 1 Free on Snacks</h3>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+<h3>Contact Us</h3>
+<p>📞 7064855983</p>
+<p>📍 Your Address</p>
+</div>
+
+<a class="whatsapp" href="https://wa.me/917064855983">💬</a>
+
+<script>
+
+const data = {
+rice:[
+{name:"Basmati Rice 5kg",price:"₹400",stock:"Available",img:"https://images.unsplash.com/photo-1586201375761-83865001e31c"},
+{name:"Atta 10kg",price:"₹500",stock:"Available",img:"https://images.unsplash.com/photo-1604908812389-2a0c54a7c95b"}
+],
+snacks:[
+{name:"Lays",price:"₹20",stock:"Available",img:"https://images.unsplash.com/photo-1585238342024-78d387f4a707"},
+{name:"Kurkure",price:"₹10",stock:"Available",img:"https://images.unsplash.com/photo-1621939514649-280e2ee25f60"}
+],
+drinks:[
+{name:"Pepsi",price:"₹40",stock:"Available",img:"https://images.unsplash.com/photo-1604908176997-4310a3cb5b61"},
+{name:"Sprite",price:"₹40",stock:"Available",img:"https://images.unsplash.com/photo-1622483767028-3f66f0a4d07e"}
+]
+};
+
+function show(type){
+let html="";
+data[type].forEach(item=>{
+html+=`
+<div class="card">
+<img src="${item.img}">
+<h4>${item.name}</h4>
+<p>Price: ${item.price}</p>
+<p>Stock: ${item.stock}</p>
+<button onclick="order('${item.name}')">Order Now</button>
+</div>
+`;
+});
+document.getElementById("products").innerHTML=html;
+}
+
+function order(name){
+let msg="Hello, I want to order "+name;
+window.open("https://wa.me/917064855983?text="+encodeURIComponent(msg));
+}
+
+function scrollToProducts(){
+document.getElementById("products").scrollIntoView();
+}
+
+</script>
+
+</body>
+</html>
