@@ -1,210 +1,679 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kirana Store</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khusi Kirana Store</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-body{background:#f4f6f9;}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
 
-/* NAV */
-nav{
-background:#111;
-padding:15px;
-text-align:center;
-color:white;
-}
+  <style>
+    :root{
+      --bg:#fff8ee;
+      --card:#fffdf8;
+      --brown:#5b371f;
+      --brown-2:#7a4b2c;
+      --orange:#f29c1f;
+      --orange-dark:#d98000;
+      --green:#3b7d3d;
+      --green-soft:#e7f3e7;
+      --text:#2c241d;
+      --muted:#6f6256;
+      --line:#ecd7be;
+      --shadow:0 14px 30px rgba(93,55,28,.12);
+      --radius:22px;
+      --container:1240px;
+    }
 
-/* HERO */
-.hero{
-background:linear-gradient(135deg,#28a745,#6ddf6d);
-color:white;
-text-align:center;
-padding:50px 20px;
-}
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
 
-.hero button{
-margin:10px;
-padding:12px 20px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
+    body{
+      font-family:"DM Sans",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
 
-/* CATEGORY */
-.categories{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:20px;
-}
+    img{
+      display:block;
+      max-width:100%;
+    }
 
-.cat{
-background:white;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-cursor:pointer;
-text-align:center;
-}
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-.cat img{
-width:100%;
-height:150px;
-object-fit:cover;
-}
+    .container{
+      width:min(var(--container), calc(100% - 28px));
+      margin:0 auto;
+    }
 
-/* PRODUCTS */
-.products{
-padding:20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
+    /* NAV */
+    .nav-wrap{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(255,248,238,.95);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(90,55,22,.08);
+    }
 
-.card{
-background:white;
-border-radius:10px;
-overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
+    .navbar{
+      min-height:88px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
 
-.card img{
-width:100%;
-height:150px;
-object-fit:cover;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
 
-.card button{
-margin:10px;
-padding:10px;
-background:#25D366;
-color:white;
-border:none;
-border-radius:5px;
-}
+    .brand-icon{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#ffbd52,#ef8b0c);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      box-shadow:var(--shadow);
+      flex:0 0 auto;
+    }
 
-/* OFFER */
-.offer{
-background:#fff3cd;
-padding:20px;
-text-align:center;
-margin:20px;
-}
+    .brand-title{
+      font-family:"Merriweather",serif;
+      color:var(--brown);
+      font-size:1.55rem;
+      line-height:1;
+    }
 
-/* CONTACT */
-.contact{
-padding:20px;
-text-align:center;
-background:white;
-}
+    .brand-sub{
+      color:var(--orange-dark);
+      font-size:.98rem;
+      font-weight:800;
+      margin-top:4px;
+    }
 
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:15px;
-border-radius:50%;
-text-decoration:none;
-}
-</style>
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      font-weight:700;
+      color:#5a4c40;
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover{
+      color:var(--orange-dark);
+    }
+
+    .nav-btn{
+      background:linear-gradient(180deg,#ffb33a,#ef9000);
+      color:#2d1a06;
+      padding:14px 22px;
+      border-radius:999px;
+      font-weight:800;
+      box-shadow:var(--shadow);
+      white-space:nowrap;
+    }
+
+    /* HERO */
+    .hero{
+      padding:34px 0 26px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .hero-copy{
+      padding:12px 0;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      background:#fff0d7;
+      color:var(--brown-2);
+      border:1px solid #f2d2a7;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.98rem;
+    }
+
+    .hero-title{
+      margin-top:18px;
+      font-family:"Merriweather",serif;
+      font-size:clamp(2.4rem, 5vw, 4.8rem);
+      line-height:1.02;
+      color:var(--brown);
+    }
+
+    .hero-title .accent{
+      color:var(--orange-dark);
+    }
+
+    .hero-text{
+      margin-top:16px;
+      font-size:1.18rem;
+      color:var(--muted);
+      max-width:620px;
+      line-height:1.7;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:26px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-width:180px;
+      padding:16px 24px;
+      border-radius:999px;
+      font-weight:800;
+      box-shadow:var(--shadow);
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg,#ffb43b,#ef8f00);
+      color:#2f1d08;
+    }
+
+    .btn-secondary{
+      background:#fff;
+      border:1px solid #edd8be;
+      color:var(--brown);
+    }
+
+    .hero-card{
+      background:#fff;
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(91,55,31,.08);
+    }
+
+    .hero-image{
+      width:100%;
+      height:420px;
+      object-fit:cover;
+    }
+
+    .hero-bottom{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      padding:16px;
+      background:#fffaf1;
+      border-top:1px solid #f2e4cf;
+    }
+
+    .hero-pill{
+      background:#fff;
+      border:1px solid #f1e1c6;
+      border-radius:16px;
+      padding:14px 12px;
+      text-align:center;
+      font-weight:800;
+      color:var(--brown);
+      font-size:.95rem;
+    }
+
+    /* FEATURES */
+    .feature-strip{
+      padding:8px 0 26px;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .feature{
+      background:#fff;
+      border-radius:20px;
+      padding:22px 18px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(91,55,31,.08);
+      text-align:center;
+    }
+
+    .feature-icon{
+      width:62px;
+      height:62px;
+      border-radius:50%;
+      margin:0 auto 12px;
+      background:var(--green-soft);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.6rem;
+    }
+
+    .feature h3{
+      font-size:1.2rem;
+      color:var(--brown);
+      margin-bottom:6px;
+    }
+
+    .feature p{
+      color:var(--muted);
+      font-size:.98rem;
+    }
+
+    /* SECTION TITLE */
+    .section{
+      padding:18px 0 34px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .section-title{
+      font-family:"Merriweather",serif;
+      color:var(--brown);
+      font-size:2rem;
+    }
+
+    .section-line{
+      height:2px;
+      flex:1;
+      background:linear-gradient(90deg, #f0d5b1, transparent);
+    }
+
+    /* CATEGORIES */
+    .cat-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .cat-card{
+      background:#fff;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(91,55,31,.08);
+    }
+
+    .cat-card img{
+      width:100%;
+      height:210px;
+      object-fit:cover;
+    }
+
+    .cat-body{
+      padding:18px 16px;
+      text-align:center;
+    }
+
+    .cat-body h3{
+      color:var(--brown);
+      font-size:1.22rem;
+      margin-bottom:6px;
+    }
+
+    .cat-body p{
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    /* OFFERS */
+    .offer-banner{
+      margin-top:26px;
+      background:linear-gradient(90deg,#4d2d18,#7a4b2c);
+      color:#fff8ef;
+      border-radius:24px;
+      padding:28px 26px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .offer-banner h3{
+      font-family:"Merriweather",serif;
+      font-size:1.8rem;
+      line-height:1.2;
+    }
+
+    .offer-banner p{
+      margin-top:8px;
+      color:#f4ddbf;
+      font-size:1.02rem;
+    }
+
+    .offer-btn{
+      background:linear-gradient(180deg,#ffb43b,#ef8f00);
+      color:#2d1a06;
+      padding:16px 24px;
+      border-radius:999px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    /* CONTACT */
+    .contact-wrap{
+      background:#fff;
+      border:1px solid rgba(91,55,31,.08);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+    }
+
+    .contact-left{
+      padding:34px 28px;
+      background:linear-gradient(180deg,#fffdf8,#fff4e1);
+    }
+
+    .contact-left h3{
+      font-family:"Merriweather",serif;
+      color:var(--brown);
+      font-size:2rem;
+      margin-bottom:10px;
+    }
+
+    .contact-left p{
+      color:var(--muted);
+      line-height:1.7;
+      max-width:520px;
+    }
+
+    .contact-list{
+      margin-top:20px;
+      display:grid;
+      gap:14px;
+    }
+
+    .contact-item{
+      background:#fff;
+      border:1px solid #f0dfc7;
+      border-radius:16px;
+      padding:16px 18px;
+      font-weight:700;
+      color:var(--brown);
+    }
+
+    .contact-right{
+      min-height:100%;
+      background:
+        linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.08)),
+        url("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
+    }
+
+    /* FOOTER */
+    .footer{
+      padding:22px 0 40px;
+      text-align:center;
+      color:#7d6f61;
+      font-size:.96rem;
+    }
+
+    /* MOBILE */
+    @media (max-width: 1100px){
+      .hero-grid,
+      .contact-wrap{
+        grid-template-columns:1fr;
+      }
+
+      .cat-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .feature-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media (max-width: 760px){
+      .nav-links,
+      .nav-btn{
+        display:none;
+      }
+
+      .navbar{
+        min-height:76px;
+      }
+
+      .brand-icon{
+        width:46px;
+        height:46px;
+        font-size:24px;
+      }
+
+      .brand-title{
+        font-size:1.15rem;
+      }
+
+      .brand-sub{
+        font-size:.82rem;
+      }
+
+      .hero-title{
+        font-size:2.4rem;
+      }
+
+      .hero-text{
+        font-size:1rem;
+      }
+
+      .hero-image{
+        height:280px;
+      }
+
+      .hero-bottom{
+        grid-template-columns:1fr;
+      }
+
+      .feature-grid,
+      .cat-grid{
+        grid-template-columns:1fr;
+      }
+
+      .offer-banner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .section-title{
+        font-size:1.6rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<nav>
-<h2>Khusi Kirana Store</h2>
-</nav>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav class="navbar">
+        <div class="brand">
+          <div class="brand-icon">🛍️</div>
+          <div>
+            <div class="brand-title">Khusi Kirana Store</div>
+            <div class="brand-sub">Daily Essentials • Fresh Groceries</div>
+          </div>
+        </div>
 
-<div class="hero">
-<h1>Daily Grocery at Best Price</h1>
-<button onclick="scrollToProducts()">View Products</button>
-</div>
+        <div class="nav-links">
+          <a href="#home" class="active">Home</a>
+          <a href="#categories">Categories</a>
+          <a href="#offers">Offers</a>
+          <a href="#contact">Contact</a>
+        </div>
 
-<!-- CATEGORY -->
-<div class="categories">
+        <a href="#contact" class="nav-btn">Order Now</a>
+      </nav>
+    </div>
+  </div>
 
-<div class="cat" onclick="show('rice')">
-<img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
-<h3>Rice & Atta</h3>
-</div>
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Fresh • Affordable • Trusted</div>
+        <h1 class="hero-title">
+          Khusi <span class="accent">Kirana</span><br>Store
+        </h1>
+        <p class="hero-text">
+          Ghar ki रोज ki zarurat ka har samaan ek hi jagah. Fresh groceries,
+          household products, masale, dairy aur daily needs best quality ke saath.
+        </p>
 
-<div class="cat" onclick="show('snacks')">
-<img src="https://images.unsplash.com/photo-1585238342024-78d387f4a707">
-<h3>Snacks</h3>
-</div>
+        <div class="hero-actions">
+          <a href="#categories" class="btn btn-primary">🛒 Shop Categories</a>
+          <a href="#contact" class="btn btn-secondary">📞 Contact Store</a>
+        </div>
+      </div>
 
-<div class="cat" onclick="show('drinks')">
-<img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
-<h3>Beverages</h3>
-</div>
+      <div class="hero-card">
+        <img class="hero-image" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" alt="Kirana Store">
+        <div class="hero-bottom">
+          <div class="hero-pill">Fresh Grocery Items</div>
+          <div class="hero-pill">Best Daily Prices</div>
+          <div class="hero-pill">Friendly Service</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <section class="feature-strip">
+    <div class="container feature-grid">
+      <div class="feature">
+        <div class="feature-icon">🥬</div>
+        <h3>Fresh Items</h3>
+        <p>Har din fresh grocery stock</p>
+      </div>
 
-<!-- PRODUCTS -->
-<div id="products" class="products"></div>
+      <div class="feature">
+        <div class="feature-icon">🏷️</div>
+        <h3>Good Prices</h3>
+        <p>Budget-friendly daily shopping</p>
+      </div>
 
-<!-- OFFER -->
-<div class="offer">
-<h3>🔥 Today Offer: Buy 2 Get 1 Free on Snacks</h3>
-</div>
+      <div class="feature">
+        <div class="feature-icon">🏠</div>
+        <h3>Household Needs</h3>
+        <p>Ghar ke liye sab kuch</p>
+      </div>
 
-<!-- CONTACT -->
-<div class="contact">
-<h3>Contact Us</h3>
-<p>📞 7064855983</p>
-<p>📍 Your Address</p>
-</div>
+      <div class="feature">
+        <div class="feature-icon">🤝</div>
+        <h3>Trusted Store</h3>
+        <p>Local shop, quality service</p>
+      </div>
+    </div>
+  </section>
 
-<a class="whatsapp" href="https://wa.me/917064855983">💬</a>
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Shop by Categories</h2>
+        <div class="section-line"></div>
+      </div>
 
-<script>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?auto=format&fit=crop&w=900&q=80" alt="Atta Rice Dal">
+          <div class="cat-body">
+            <h3>Atta, Rice & Dal</h3>
+            <p>Daily ration essentials</p>
+          </div>
+        </div>
 
-const data = {
-rice:[
-{name:"Basmati Rice 5kg",price:"₹400",stock:"Available",img:"https://images.unsplash.com/photo-1586201375761-83865001e31c"},
-{name:"Atta 10kg",price:"₹500",stock:"Available",img:"https://images.unsplash.com/photo-1604908812389-2a0c54a7c95b"}
-],
-snacks:[
-{name:"Lays",price:"₹20",stock:"Available",img:"https://images.unsplash.com/photo-1585238342024-78d387f4a707"},
-{name:"Kurkure",price:"₹10",stock:"Available",img:"https://images.unsplash.com/photo-1621939514649-280e2ee25f60"}
-],
-drinks:[
-{name:"Pepsi",price:"₹40",stock:"Available",img:"https://images.unsplash.com/photo-1604908176997-4310a3cb5b61"},
-{name:"Sprite",price:"₹40",stock:"Available",img:"https://images.unsplash.com/photo-1622483767028-3f66f0a4d07e"}
-]
-};
+        <div class="cat-card">
+          <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=900&q=80" alt="Masala and spices">
+          <div class="cat-body">
+            <h3>Masala & Spices</h3>
+            <p>Fresh taste for every kitchen</p>
+          </div>
+        </div>
 
-function show(type){
-let html="";
-data[type].forEach(item=>{
-html+=`
-<div class="card">
-<img src="${item.img}">
-<h4>${item.name}</h4>
-<p>Price: ${item.price}</p>
-<p>Stock: ${item.stock}</p>
-<button onclick="order('${item.name}')">Order Now</button>
-</div>
-`;
-});
-document.getElementById("products").innerHTML=html;
-}
+        <div class="cat-card">
+          <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=900&q=80" alt="Oil and grocery">
+          <div class="cat-body">
+            <h3>Oil & Grocery</h3>
+            <p>Cooking and pantry items</p>
+          </div>
+        </div>
 
-function order(name){
-let msg="Hello, I want to order "+name;
-window.open("https://wa.me/917064855983?text="+encodeURIComponent(msg));
-}
+        <div class="cat-card">
+          <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=900&q=80" alt="Household products">
+          <div class="cat-body">
+            <h3>Household Products</h3>
+            <p>Soap, cleaner and more</p>
+          </div>
+        </div>
+      </div>
 
-function scrollToProducts(){
-document.getElementById("products").scrollIntoView();
-}
+      <div class="offer-banner" id="offers">
+        <div>
+          <h3>Special Weekly Offers on Daily Use Products</h3>
+          <p>Selected groceries aur kitchen items par budget-friendly deals.</p>
+        </div>
+        <a href="#contact" class="offer-btn">See Offers</a>
+      </div>
+    </div>
+  </section>
 
-</script>
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Contact Khusi Kirana Store</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="contact-left">
+          <h3>Apni daily shopping ko easy banao</h3>
+          <p>
+            Grocery, ration aur household सामान ke liye humse contact karein.
+            Fast response, local trust aur daily needs ke liye reliable service.
+          </p>
+
+          <div class="contact-list">
+            <div class="contact-item">📍 Main Market, Your Area, India</div>
+            <div class="contact-item">📞 +91 98765 43210</div>
+            <div class="contact-item">🕒 Open Daily: 7:00 AM – 10:00 PM</div>
+            <div class="contact-item">🟢 WhatsApp Orders Available</div>
+          </div>
+        </div>
+
+        <div class="contact-right"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    © 2026 Khusi Kirana Store. All rights reserved.
+  </div>
 
 </body>
 </html>
